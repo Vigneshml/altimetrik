@@ -1,0 +1,160 @@
+
+*********************************************************************************
+Alimetrik - Employee - Project API Service
+***********************************************************************************
+
+
+
+API Endpoints (Kindly go through the http://localhost:8080/swagger-ui.html to get to know about all the endpoints)
+
+Method	Endpoint	Description
+POST	/projects/allocate	Allocate an employee to a project
+GET	/employees/skills	Fetch employees by primary and secondary skills
+GET	/employees/without-skill	Fetch employees not allocated with a skill
+GET	/projects/{id}/second-experienced	Fetch 2nd most experienced employee in a project
+
+
+Technologies Used
+Spring WebFlux: For reactive programming.
+MongoDB: For database storage.
+Swagger/OpenAPI: For API documentation.
+
+
+Todo:
+Side car design pattern to implemented for notify email service
+all the configurtions need to be referred from key-vault
+
+Sample Request Responses:
+
+Endpoint: GET: localhost:8080/altimetrik/employees
+
+Request Body: NA
+
+Response:
+
+[
+    {
+        "id": "1",
+        "employeeId": "EMP001",
+        "employeeName": "Vignesh",
+        "capabilityCentre": "PRODUCT_AND_PLATFORM",
+        "dateOfJoining": "2020-01-15",
+        "designation": "PRINCIPAL_ENGINEER",
+        "primarySkill": "Java",
+        "secondarySkill": "Spring",
+        "overallExperience": 10.5,
+        "projects": [
+            {
+                "accountName": "BNYM",
+                "projectName": "Modernization",
+                "allocation": 0.5,
+                "projectStartDate": "2023-01-01",
+                "projectEndDate": "2024-01-01",
+                "remarks": "Key project"
+            },
+            {
+                "accountName": "PAYPAL",
+                "projectName": "EV Integration",
+                "allocation": 0.3,
+                "projectStartDate": "2023-06-01",
+                "projectEndDate": "2024-06-01",
+                "remarks": "Strategic project"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "employeeId": "EMP002",
+        "employeeName": "Rahul",
+        "capabilityCentre": "PRODUCT_AND_PLATFORM",
+        "dateOfJoining": "2020-01-15",
+        "designation": "PRINCIPAL_ENGINEER",
+        "primarySkill": "Java",
+        "secondarySkill": "Spring",
+        "overallExperience": 11.0,
+        "projects": [
+            {
+                "accountName": "BNYM",
+                "projectName": "Modernization",
+                "allocation": 0.8,
+                "projectStartDate": "2023-01-01",
+                "projectEndDate": "2024-01-01",
+                "remarks": "Key project"
+            },
+            {
+                "accountName": "WESTERN_UNION",
+                "projectName": "EV Integration",
+                "allocation": 0.1,
+                "projectStartDate": "2023-06-01",
+                "projectEndDate": "2024-06-01",
+                "remarks": "Strategic project"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "employeeId": "EMP008",
+        "employeeName": "Murugan",
+        "capabilityCentre": "PRODUCT_AND_PLATFORM",
+        "dateOfJoining": "2020-01-15",
+        "designation": "PRINCIPAL_ENGINEER",
+        "primarySkill": "Java",
+        "secondarySkill": "Spring",
+        "overallExperience": 18.0,
+        "projects": [
+            {
+                "accountName": "BNYM",
+                "projectName": "Modernization",
+                "allocation": 0.8,
+                "projectStartDate": "2023-01-01",
+                "projectEndDate": "2024-01-01",
+                "remarks": "Key project"
+            }
+        ]
+    }
+]
+
+
+Endpoint: POST: localhost:8080/altimetrik/employees/2/allocate-project
+
+Request body:
+{
+  "accountName": "WESTERN_UNION",
+  "projectName": "EV Integration",
+  "allocation": 0.2,
+  "projectStartDate": "2023-06-01",
+  "projectEndDate": "2024-06-01",
+  "remarks": "Strategic project"
+}
+
+Response:
+{
+    "id": "2",
+    "employeeId": "EMP002",
+    "employeeName": "Rahul",
+    "capabilityCentre": "PRODUCT_AND_PLATFORM",
+    "dateOfJoining": "2020-01-15",
+    "designation": "PRINCIPAL_ENGINEER",
+    "primarySkill": "Java",
+    "secondarySkill": "Spring",
+    "overallExperience": 11.0,
+    "projects": [
+        {
+            "accountName": "BNYM",
+            "projectName": "Modernization",
+            "allocation": 0.8,
+            "projectStartDate": "2023-01-01",
+            "projectEndDate": "2024-01-01",
+            "remarks": "Key project"
+        },
+        {
+            "accountName": "WESTERN_UNION",
+            "projectName": "EV Integration",
+            "allocation": 0.2,
+            "projectStartDate": "2023-06-01",
+            "projectEndDate": "2024-06-01",
+            "remarks": "Strategic project"
+        }
+    ]
+}
+
